@@ -8,8 +8,6 @@ public class DataBase {
 
     private static Connection connection = null;
 
-    private DataBase() {
-    }
     synchronized public static Connection getConnection() {
         String url = System.getProperty("dbURL");
         String userName = System.getProperty("dbUserName");
