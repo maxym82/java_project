@@ -4,22 +4,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DataBaseConnection {
+public class DataBase {
 
     private static Connection connection = null;
-    private static final String url;
-    private static final String userName;
-    private static final String password;
 
-    private DataBaseConnection () {
+    private DataBase() {
     }
-    static {
-        url = System.getProperty("dbURL");
-        userName = System.getProperty("dbUserName");
-        password = System.getProperty("dbPassword");
-    }
-
-    public static Connection getConnection() {
+    synchronized public static Connection getConnection() {
+        String url = System.getProperty("dbURL");
+        String userName = System.getProperty("dbUserName");
+        String password = System.getProperty("dbPassword");
         try {
             if (connection == null) {
                 connection = DriverManager.getConnection(url, userName, password);
