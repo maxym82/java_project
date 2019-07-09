@@ -8,23 +8,19 @@ import java.util.Properties;
 
 @SpringBootApplication
 public class Application {
+    private static final String CONFIG_FILE_NAME = "config.properties";
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
 
-    private static void initProperties() {
+    public static void initProperties() throws Exception {
         Properties prop = new Properties();
-        String propFile = "config.properties";
-        try {
-            InputStream readFile = Application.class.getClassLoader().getResourceAsStream(propFile);
-            prop.load(readFile);
-        } catch (Exception e) {
-            System.out.println("Can not read configuration file: \n" + e.getLocalizedMessage());
+        InputStream readFile = Application.class.getClassLoader().getResourceAsStream(CONFIG_FILE_NAME);
+        prop.load(readFile);
+        for (String propName : prop.stringPropertyNames()) {
+            System.setProperty(propName, prop.getProperty(propName));
         }
-        System.setProperty("dbURL", prop.getProperty("dbURL"));
-        System.setProperty("dbUserName", prop.getProperty("dbUserName"));
-        System.setProperty("dbPassword", prop.getProperty("dbPassword"));
     }
 }
