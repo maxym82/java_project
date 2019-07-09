@@ -15,7 +15,7 @@ public class Application {
     }
 
 
-    public static void initProperties() throws Exception {
+    private static void initProperties() throws Exception {
         Properties prop = new Properties();
         InputStream readFile = Application.class.getClassLoader().getResourceAsStream(CONFIG_FILE_NAME);
         prop.load(readFile);
