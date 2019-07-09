@@ -14,7 +14,7 @@ public class Application {
     }
 
 
-    public static void setSystemProperties() {
+    private static void initProperties() {
         Properties prop = new Properties();
         String propFile = "config.properties";
         try {
